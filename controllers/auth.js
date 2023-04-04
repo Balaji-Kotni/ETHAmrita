@@ -126,7 +126,7 @@ export const callback = async (req, res) => {
         res.status(400).send(`400 - Bad Request: claim not found`);
         return;
       }
-      Claims.updateOne(
+      await Claims.updateOne(
         {
           callbackId,
         },
@@ -144,7 +144,7 @@ export const callback = async (req, res) => {
         res.status(400).send(`400 - Bad Request: user not found`);
         return;
       }
-      User.updateOne(
+      await User.updateOne(
         {
           telegramID: claim.telegramID,
         },
