@@ -6,6 +6,7 @@ const userSchema = mongoose.Schema(
     userName: {
       type: String,
       unique: true,
+      default: null,
     },
     TelegramID: {
       type: String,
@@ -14,6 +15,15 @@ const userSchema = mongoose.Schema(
     points: {
       type: Number,
       default: 0,
+    },
+    claims: {
+      type: Array,
+      default: [],
+    },
+    githubProfile: {
+      type: Object,
+      default: {},
+      require: true,
     },
   },
   {

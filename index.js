@@ -26,8 +26,8 @@ const mongoUrl = process.env.MONGODB_URI;
 mongoose
   .connect(mongoUrl, {
     useNewUrlParser: true,
-    useCreateIndex: true,
     useUnifiedTopology: true,
+    dbName: "ETHAmrita",
   })
   .then(() => {
     /** ready to use. The `mongoose.connect()` promise resolves to undefined. */
