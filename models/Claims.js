@@ -3,11 +3,9 @@ import mongoose from "mongoose";
 const claimSchema = mongoose.Schema({
   callbackId: {
     type: String,
-    unique: true,
   },
   templateId: {
     type: String,
-    unique: true,
   },
   telegramID: {
     type: String,

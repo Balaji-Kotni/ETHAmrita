@@ -119,7 +119,7 @@ export const callback = async (req, res) => {
     }
     const callbackId = req.params.id;
     try {
-      const claim = Claims.findOne({
+      const claim = await Claims.findOne({
         callbackId,
       });
       if (!claim) {
