@@ -72,13 +72,6 @@ export const getRefer = async (req, res) => {
 
 export const callback = async (req, res) => {
   console.log(req.body);
-  console.log(
-    "Callback received",
-    req.params.id,
-    req.body.callbackId,
-    req.body.templateId,
-    req.body.data
-  );
   if (!req.params.id) {
     res.status(400).send(`400 - Bad Request: callbackId is required`);
     return;
@@ -89,6 +82,6 @@ export const callback = async (req, res) => {
     return;
   }
 
-  const reqBody = JSON.parse(req.body);
+  const reqBody = JSON.parse(Object.keys(req.body)[0]);
   console.log(reqBody);
 };
