@@ -137,7 +137,7 @@ export const callback = async (req, res) => {
           },
         }
       );
-      const user = User.findOne({
+      const user = await User.findOne({
         telegramID: claim.telegramID,
       });
       if (!user) {
