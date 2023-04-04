@@ -41,17 +41,14 @@ function isGitHubUrl(url) {
 
 export const getRefer = async (req, res) => {
   const { github_link } = req.body;
-  if (!isGitHubUrl(github_link)) {
-    return res.status(400).json({ message: "Invalid github link" });
-  }
   if (!github_link) {
     return res.status(400).json({ message: "Please provide a github link" });
   }
-  const uuid = generateUuid();
-  const repo = github_link.split("github.com/")[1];
-  if (!isValidRepo(repo)) {
+  if (!isGitHubUrl(github_link)) {
     return res.status(400).json({ message: "Invalid github link" });
   }
+  const uuid = generateUuid();
+  const repo = github_link.split("github.com/")[1];
   const [owner, repoName] = repo.split("/");
   const callbackId = "repo-" + uuid;
   const template = (
@@ -92,6 +89,6 @@ export const callback = async (req, res) => {
     return;
   }
 
-  const reqBody = JSON.parse(decodeURIComponent(req.body));
+  const reqBody = JSON.parse(req.body);
   console.log(reqBody);
 };
