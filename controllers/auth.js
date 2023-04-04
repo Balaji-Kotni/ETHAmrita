@@ -150,7 +150,7 @@ export const callback = async (req, res) => {
         },
         {
           $set: {
-            points: user.points + claim.repo.watchers,
+            points: user.points + claim.repo.watchers_count,
           },
           $push: {
             claims: claim,
