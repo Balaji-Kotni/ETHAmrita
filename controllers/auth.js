@@ -138,19 +138,21 @@ export const callback = async (req, res) => {
         }
       );
       const user = await User.findOne({
-        telegramID: claim.telegramID,
+        TelegramID: claim.telegramID,
       });
       if (!user) {
         res.status(400).send(`400 - Bad Request: user not found`);
         return;
       }
+      console.log("claim", claim);
+      console.log(claim.repo.watchers_count);
       await User.updateOne(
         {
           telegramID: claim.telegramID,
         },
         {
           $set: {
-            points: user.points + claim.repo.watchers_count,
+            points: user.points + claim.repo.watchers_count || 1,
           },
           $push: {
             claims: claim,
