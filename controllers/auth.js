@@ -148,7 +148,7 @@ export const callback = async (req, res) => {
       console.log(claim.repo.watchers_count);
       await User.updateOne(
         {
-          telegramID: claim.telegramID,
+          TelegramID: claim.telegramID,
         },
         {
           $set: {
