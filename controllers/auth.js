@@ -64,7 +64,7 @@ export const getRefer = async (req, res) => {
   const repo = github_link.split("github.com/")[1];
   const [owner, repoName] = repo.split("/");
   const repo_detiles = await getRepo(owner, repoName);
-  if (repo_detiles.private == true || repo_detiles.message == "Not Found") {
+  if (repo_detiles == false || repo_detiles == undefined) {
     return res.status(400).json({
       message:
         "Please provide a valid github link. The repo should be public and should exist",
