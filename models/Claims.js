@@ -9,7 +9,7 @@ const claimSchema = mongoose.Schema(
       type: String,
     },
     telegramID: {
-      type: String,
+      type: Number,
       unique: false,
     },
     claim: {

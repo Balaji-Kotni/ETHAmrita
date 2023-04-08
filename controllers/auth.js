@@ -64,9 +64,10 @@ export const getRefer = async (req, res) => {
   const repo = github_link.split("github.com/")[1];
   const [owner, repoName] = repo.split("/");
   const repo_detiles = await getRepo(owner, repoName);
-  if (repo_detiles.private == true) {
+  if (repo_detiles.private == true || repo_detiles.message == "Not Found") {
     return res.status(400).json({
-      message: "This repo is private, please provide a public repo",
+      message:
+        "Please provide a valid github link. The repo should be public and should exist",
     });
   }
   const callbackId = "repo-" + uuid;
@@ -82,15 +83,15 @@ export const getRefer = async (req, res) => {
   ).generateTemplate(callbackId);
   const url = template.url;
   const templateId = template.id;
-  console.log(telegramID);
   try {
-    const newClaim = new Claims({
-      callbackId,
-      templateId,
-      telegramID,
+    console.log(callbackId, templateId, telegramID, repo_detiles);
+    await Claims.create({
+      callbackId: callbackId,
+      templateId: templateId,
+      telegramID: telegramID,
       repo: repo_detiles,
     });
-    await newClaim.save();
+
     return res.status(200).json({
       url,
       callbackId,
